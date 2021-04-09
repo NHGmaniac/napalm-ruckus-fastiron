@@ -926,19 +926,21 @@ class FastIronDriver(NetworkDriver):
                 chas_id = FastIronDriver.__retrieve_all_locations(output, "Chassis", 3)[0]
                 sys_nam = FastIronDriver.__retrieve_all_locations(output, "name", 0)[0]
 
+                keyword_dict = {"Systemdescription": "", "Systemcapabilities": "", "Enabledcapabilities": "", "Portdescription": ""}
                 for line in output.split('\n'):
                     wl = line.split()
-                    print(wl)
+                    keyword_dict[wl.pop(0) + wl.pop(1)] = "".join(wl)
+                    
 
-                sys_des = FastIronDriver.__retrieve_all_locations(output, "System description", 0)                 # grabs system description
-                sys_cap = FastIronDriver.__retrieve_all_locations(output, "System capabilities", 0)                 # grabs system capability
-                en_cap = FastIronDriver.__retrieve_all_locations(output, "Enabled capabilities", 0)                 # grabs enabled capability
-                port_de = FastIronDriver.__retrieve_all_locations(output, "Port description", 0)                      # grabs ports description
+                sys_des = keyword_dict["Systemdescription"]                 # grabs system description
+                sys_cap = keyword_dict["Systemcapabilities"]                 # grabs system capability
+                en_cap = keyword_dict["Enabledcapabilities"]                 # grabs enabled capability
+                port_de = keyword_dict["Portdescription"]                      # grabs ports description
         
-                sys_des = FastIronDriver.__unite_strings(sys_des[0]) if len(sys_des) > 0 else ""    # removes excess spaces and n lines
-                sys_cap = FastIronDriver.__unite_strings(sys_cap[0]) if len(sys_cap) > 0 else ""
-                port_de = FastIronDriver.__unite_strings(port_de[0]) if len(port_de) > 0 else ""
-                en_cap = FastIronDriver.__unite_strings(en_cap[0]) if len(en_cap) > 0 else ""
+                sys_des = FastIronDriver.__unite_strings(sys_des)    # removes excess spaces and n lines
+                sys_cap = FastIronDriver.__unite_strings(sys_cap)
+                port_de = FastIronDriver.__unite_strings(port_de)
+                en_cap = FastIronDriver.__unite_strings(en_cap)
                 
                 ret_dict[par_int] = [{
                     'parent_interface': par_int,
