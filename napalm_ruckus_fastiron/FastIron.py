@@ -929,8 +929,10 @@ class FastIronDriver(NetworkDriver):
                 keyword_dict = {"Systemdescription": "", "Systemcapabilities": "", "Enabledcapabilities": "", "Portdescription": ""}
                 for line in output.split('\n'):
                     wl = line.split()
+                    print(wl)
                     if len(wl) > 2:
                         keyword_dict[wl.pop(0) + wl.pop(1)] = "".join(wl)
+                        print(wl)
 
                     
 
