@@ -925,17 +925,12 @@ class FastIronDriver(NetworkDriver):
                 par_int = FastIronDriver.__retrieve_all_locations(output, "Local", 1)[0]
                 chas_id = FastIronDriver.__retrieve_all_locations(output, "Chassis", 3)[0]
                 sys_nam = FastIronDriver.__retrieve_all_locations(output, "name", 0)[0]
-        
-                e_token_sd = output.find("System description") + len("System description")
-                s_token_sc = output.find("System capabilities")
-                e_token_sc = output.find("System capabilities") + len("System capabilities")
-                s_token_ma = output.find("Management address")
-                s_token_la = output.find("Link aggregation")
-                e_token_pd = output.find("Port description") + len("Port description")
-        
-                sys_des = output[e_token_sd:s_token_sc]                 # grabs system description
-                sys_cap = output[e_token_sc:s_token_ma]                 # grabs system capability
-                port_de = output[e_token_pd:s_token_la]                 # grabs ports description
+
+                sys_des = FastIronDriver.__retrieve_all_locations(output, "System description", 0)[0]                 # grabs system description
+                sys_cap = FastIronDriver.__retrieve_all_locations(output, "System capabilities", 0)[0]                 # grabs system capability
+                en_cap = FastIronDriver.__retrieve_all_locations(output, "Enabled capabilities", 0)[0]                 # grabs enabled capability
+
+                port_de = FastIronDriver.__retrive_all_locations(output, "Port description", 0)[0]                 # grabs ports description
         
                 sys_des = FastIronDriver.__unite_strings(sys_des)     # removes excess spaces and n lines
                 sys_cap = FastIronDriver.__unite_strings(sys_cap)
@@ -949,7 +944,7 @@ class FastIronDriver(NetworkDriver):
                     'remote_port_description': '',
                     'remote_system_description': sys_des,
                     'remote_system_capab': sys_cap,
-                    'remote_system_enable_capab': None
+                    'remote_system_enable_capab': en_cap
                 }]
             return ret_dict
 
