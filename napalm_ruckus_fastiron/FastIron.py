@@ -929,8 +929,7 @@ class FastIronDriver(NetworkDriver):
                 sys_des = FastIronDriver.__retrieve_all_locations(output, "System description", 0)                 # grabs system description
                 sys_cap = FastIronDriver.__retrieve_all_locations(output, "System capabilities", 0)                 # grabs system capability
                 en_cap = FastIronDriver.__retrieve_all_locations(output, "Enabled capabilities", 0)                 # grabs enabled capability
-
-                port_de = FastIronDriver.__retrive_all_locations(output, "Port description", 0)                 # grabs ports description
+                port_de = FastIronDriver.__retrieve_all_locations(output, "Port description", 0)                      # grabs ports description
         
                 sys_des = FastIronDriver.__unite_strings(sys_des[0]) if len(sys_des) > 0 else ""    # removes excess spaces and n lines
                 sys_cap = FastIronDriver.__unite_strings(sys_cap[0]) if len(sys_cap) > 0 else ""
