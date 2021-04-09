@@ -926,6 +926,10 @@ class FastIronDriver(NetworkDriver):
                 chas_id = FastIronDriver.__retrieve_all_locations(output, "Chassis", 3)[0]
                 sys_nam = FastIronDriver.__retrieve_all_locations(output, "name", 0)[0]
 
+                for line in output.split('\n'):
+                    wl = line.split()
+                    print(wl)
+
                 sys_des = FastIronDriver.__retrieve_all_locations(output, "System description", 0)                 # grabs system description
                 sys_cap = FastIronDriver.__retrieve_all_locations(output, "System capabilities", 0)                 # grabs system capability
                 en_cap = FastIronDriver.__retrieve_all_locations(output, "Enabled capabilities", 0)                 # grabs enabled capability
