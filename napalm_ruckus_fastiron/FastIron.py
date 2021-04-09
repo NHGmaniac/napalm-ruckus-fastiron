@@ -914,8 +914,7 @@ class FastIronDriver(NetworkDriver):
             * remote_system_enabled_capab (string)
         """
         if interface == '':                         # no interface was entered
-            print("please enter an interface")
-            return None
+            return self.get_lldp_neighbors()
 
         output = self.device.send_command('show lldp neighbor detail port ' + interface)
         output = output.replace(':', ' ')
